@@ -1,0 +1,6 @@
+name=Amazon EC2 Monitor
+version=1.0
+platforms=linux windows
+description=Given an Amazon AWS access and secret key, this plugin obtains the list of instances and performance metrics for each instance.
+requiresAgentScript=false
+restartCore=false
