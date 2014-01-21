@@ -17,22 +17,9 @@ class Error(Exception):
 def main(argv):
 	try:
 		ec2 = boto.connect_ec2(AWS_ACCESS_KEY, AWS_SECRET_KEY)
-		chain = itertools.chain.from_iterable
-		existing_instances = list(chain([res.instances for res in ec2.get_all_instances()]))
-
-		# each item in existing_instances is of type Instance, covert to string
-		existing_instances = ', '.join(map(str, existing_instances))
 		
-		# split into instance ids 
-		existing_instances = existing_instances.split("Instance:")
-		
-		# first item is empty, so remove it
-		if '' in existing_instances: existing_instances.remove('')
-		
-		#cleaning up instance list of trailing commas
-		for i in range(len(existing_instances)):
-			temp = existing_instances[i].split(",")
-			existing_instances[i] = temp[0]
+		reservations = ec2.get_all_instances()
+		instances = [i for r in reservations for i in r.instances]
 
 		c = boto.connect_cloudwatch(AWS_ACCESS_KEY, AWS_SECRET_KEY)
 		end   = datetime.datetime.now()
@@ -40,8 +27,7 @@ def main(argv):
 
 		metrics = ['CPUUtilization', 'DiskReadBytes', 'DiskReadOps', 'DiskWriteBytes', 'DiskWriteOps', 'NetworkIn', 'NetworkOut']
 
-		for i in range(len(existing_instances)):
-
+		for instance in instances:
 			for j in range(len(metrics)):
 				stats = c.get_metric_statistics(
     				60, 
@@ -50,14 +36,14 @@ def main(argv):
 					metrics[j], 
 					'AWS/EC2', 
 					'Average', 
-					{'InstanceId' : existing_instances[i] }
+					{'InstanceId' : instance.id}
 				)
 
 				if stats:
-					print existing_instances[i] + "." + metrics[j],
+					print instance.id + "." + metrics[j],
 					print stats[len(stats)-1]['Average']
-				if not stats:
-					print existing_instances[i]
+				else:
+					print instance.id
 					break
 
 	except BotoServerError as serverErr:
