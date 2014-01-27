@@ -28,6 +28,15 @@
 			<long_description>AWS Secret Key</long_description>
 			<gui_type><string/></gui_type>
 		</element>
+		<element name='Availability' parameter_type='output' data_type='ranged' gui_basic='' range_type='0' units=''>
+			<control_options>size:8</control_options>
+			<default_value></default_value>
+			<short_description>Availability</short_description>
+			<long_description>Availability of the EC2 instance.  Can be: pending, running, shutting-down, terminated, stopping, stopped</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type><string/></gui_type>
+		</element>	
 		<element name='CPUUtilization' parameter_type='output' data_type='ranged' gui_basic='' range_type='0' units='Percent'>
 			<control_options>size:8</control_options>
 			<default_value></default_value>
