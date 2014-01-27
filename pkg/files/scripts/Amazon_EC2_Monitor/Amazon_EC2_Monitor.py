@@ -11,12 +11,7 @@ AWS_ACCESS_KEY = os.environ.get('UPTIME_AWS_ACCESS_KEY')
 AWS_SECRET_KEY = os.environ.get('UPTIME_AWS_SECRET_KEY')
 
 # EC2 statuses
-EC2_STATUS_PENDING = "pending"
-EC2_STATUS_RUNNING = "running"
-EC2_STATUS_SHUTTING_DOWN = "shutting-down"
-EC2_STATUS_TERMINATED = "terminated"
-EC2_STATUS_STOPPING = "stopping"
-EC2_STATUS_STOPPED = "stopped"
+EC2_STATUS = {"running": 0, "shutting-down":1, "stopping":2, "pending":3, "terminated":4, "stopped":5}
 
 class Error(Exception):
     pass
@@ -35,8 +30,9 @@ def main(argv):
 		metrics = ['CPUUtilization', 'DiskReadBytes', 'DiskReadOps', 'DiskWriteBytes', 'DiskWriteOps', 'NetworkIn', 'NetworkOut']
 		
 		for instance in instances:
-			print instance.id + ".Availability " + instance.state
-			if instance.state == EC2_STATUS_RUNNING:	# pull stats for running instances only
+			print instance.id + ".Availability ", 
+			print EC2_STATUS[instance.state]
+			if instance.state == "running":		# pull stats for running instances only
 				for j in range(len(metrics)):
 					stats = c.get_metric_statistics(
 						60, 
@@ -54,6 +50,8 @@ def main(argv):
 		print json.dumps({
 			"error": "Error retrieving CloudWatch metrics."
 		})
+		sys.exit(2)
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
+	sys.exit(0)
