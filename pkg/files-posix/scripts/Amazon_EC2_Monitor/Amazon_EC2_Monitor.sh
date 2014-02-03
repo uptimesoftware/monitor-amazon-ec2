@@ -3,3 +3,4 @@ inst=`grep pidfile /etc/init.d/uptime_core | head -n 1 | cut -d: -f2 | rev | cut
 MIBDIRS=$inst/mibs
 export MIBDIRS
 python Amazon_EC2_Monitor.py
+../addsystem instances.txt
