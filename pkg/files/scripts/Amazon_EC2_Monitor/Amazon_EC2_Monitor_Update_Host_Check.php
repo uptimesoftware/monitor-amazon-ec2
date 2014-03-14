@@ -16,7 +16,7 @@ if (mysqli_connect_errno())
 	exit();
 }
 
-$sql = "SELECT * FROM erdc_instance WHERE name LIKE 'EC2 Instance Monitor (member)' and is_host_check=0";			
+$sql = "SELECT erdc_instance.erdc_instance_id, erdc_instance.name, entity.entity_id, entity.display_name FROM erdc_instance INNER JOIN entity ON erdc_instance.entity_id=entity.entity_id WHERE erdc_instance.name LIKE 'EC2 Instance Monitor (member)' and erdc_instance.is_host_check=0";			
 $result = mysqli_query($db, $sql);
 if (!$result)
 {
@@ -27,7 +27,7 @@ echo date('Y-m-d H:i:s') . " - " . "Start Update Host Checks\n";
 
 while($row = mysqli_fetch_array($result))
 {
-	echo date('Y-m-d H:i:s') . " - " . $row['erdc_instance_id'] . " " . $row['entity_id'];
+	echo date('Y-m-d H:i:s') . " - erdc_instance_id=" . $row['erdc_instance_id'] . " name=" . $row['name'] . " entity_id=" . $row['entity_id'] . " display_name=" . $row['display_name'];
 	echo "\n";
 	$count++;
 }
