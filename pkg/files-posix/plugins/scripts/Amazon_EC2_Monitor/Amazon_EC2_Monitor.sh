@@ -3,12 +3,12 @@ inst=`grep pidfile /etc/init.d/uptime_core | head -n 1 | cut -d: -f2 | rev | cut
 MIBDIRS=$inst/mibs
 export MIBDIRS
 
-python ../../plugins/scripts/Amazon_EC2_Monitor.py
+python Amazon_EC2_Monitor.py
 curdir=`pwd`
 if [ "$?" = "0" ]; then
 	../addsystem "$curdir/instances.txt" >> addsystem.log
 	if [ "$?" = "0" ]; then
-		/usr/local/uptime/apache/bin/php ../../plugins/scripts/Amazon_EC2_Monitor_Update_Host_Check.php >> updatehostcheck.log
+		/usr/local/uptime/apache/bin/php Amazon_EC2_Monitor_Update_Host_Check.php >> updatehostcheck.log
 		if [ "$?" != "0" ]; then
 			echo "Error - Amazon_EC2_Monitor_Update_Host_Check.php: " 1>&2
 			exit 2

@@ -1,6 +1,0 @@
-name=Amazon EC2 Monitor
-version=1.2
-platforms=linux windows
-description=This plugin will connect to your AWS account and auto-discover instance to a defined group.  As new instances are discovered to this group, an availability and performance service monitor is associated with each instance.
-requiresAgentScript=false
-restartCore=false
