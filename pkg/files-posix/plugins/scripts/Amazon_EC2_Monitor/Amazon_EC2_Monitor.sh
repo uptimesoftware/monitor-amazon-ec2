@@ -6,7 +6,7 @@ export MIBDIRS
 python Amazon_EC2_Monitor.py
 curdir=`pwd`
 if [ "$?" = "0" ]; then
-	../addsystem "$curdir/instances.txt" >> addsystem.log
+	../../../scripts/addsystem "$curdir/instances.txt" >> addsystem.log
 	if [ "$?" = "0" ]; then
 		/usr/local/uptime/apache/bin/php Amazon_EC2_Monitor_Update_Host_Check.php >> updatehostcheck.log
 		if [ "$?" != "0" ]; then
