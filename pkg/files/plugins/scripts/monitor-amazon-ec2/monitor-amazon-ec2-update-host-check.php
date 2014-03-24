@@ -16,7 +16,7 @@ if (mysqli_connect_errno())
 	exit();
 }
 
-$sql = "SELECT erdc_instance.erdc_instance_id, erdc_instance.name, entity.entity_id, entity.display_name FROM erdc_instance INNER JOIN entity ON erdc_instance.entity_id=entity.entity_id WHERE erdc_instance.name LIKE 'EC2 Instance Monitor (member)' and erdc_instance.is_host_check=0";			
+$sql = "SELECT erdc_instance.erdc_instance_id, erdc_instance.name, entity.entity_id, entity.display_name FROM erdc_instance INNER JOIN entity ON erdc_instance.entity_id=entity.entity_id WHERE erdc_instance.name LIKE 'EC2 Instance Performance Monitor (member)' and erdc_instance.is_host_check=0";			
 $result = mysqli_query($db, $sql);
 if (!$result)
 {
@@ -32,7 +32,7 @@ while($row = mysqli_fetch_array($result))
 	$count++;
 }
 
-$sql = "UPDATE erdc_instance SET is_host_check=1 WHERE name LIKE 'EC2 Instance Monitor (member)'";			
+$sql = "UPDATE erdc_instance SET is_host_check=1 WHERE name LIKE 'EC2 Instance Performance Monitor (member)'";	
 $result = mysqli_query($db, $sql);
 if (!$result)
 {
