@@ -20,7 +20,7 @@ def main(argv):
 		instances = [i for r in reservations for i in r.instances]
 		
 		if len(instances) != 0:
-			f = open('instances.txt','w')
+			f = open(os.path.join(os.path.dirname(__file__), 'instances.txt'),'w')
 			
 			for instance in instances:
 				f.write('Host Name: ')
