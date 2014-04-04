@@ -2,7 +2,7 @@
 <uptime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.uptimesoftware.com/erdc/erdc erdc" xmlns="http://www.uptimesoftware.com/erdc/erdc" xmlns:upt="http://www.uptimesoftware.com/erdc/erdc" version="4.0" target_grouping="other">
 	<class>Amazon EC2 Monitor</class>
 	<exec>com.uptimesoftware.uptime.erdc.MonitorCustomScriptRunner</exec>
-	<erdc_version>4.0</erdc_version>
+	<erdc_version>2.0</erdc_version>
 	<category>Applications - Web Services</category>
 	<category_related></category_related>
 	<grid_info>
@@ -14,7 +14,7 @@
 	<elements>
 		<element name="process_windows" parameter_type="input" data_type="string" gui_basic="1" range_type="0" hidden="true">
 			<control_options> size:40 </control_options>
-			<default_value>plugins/scripts/Amazon_EC2_Monitor/Amazon_EC2_Monitor.bat</default_value>
+			<default_value>plugins/scripts/monitor-amazon-ec2/monitor-amazon-ec2.bat</default_value>
 			<short_description>Script Name</short_description>
 			<long_description>Name of the script/binary/process to be executed by up.time </long_description>
 			<validation_rule><alphanumeric/></validation_rule>
@@ -23,7 +23,7 @@
 		</element>
 		<element name="process_linux" parameter_type="input" data_type="string" gui_basic="1" range_type="0" hidden="true">
 			<control_options> size:40 </control_options>
-			<default_value>plugins/scripts/Amazon_EC2_Monitor/Amazon_EC2_Monitor.sh</default_value>
+			<default_value>plugins/scripts/monitor-amazon-ec2/monitor-amazon-ec2.sh</default_value>
 			<short_description>Script Name</short_description>
 			<long_description>Name of the script/binary/process to be executed by up.time </long_description>
 			<validation_rule><alphanumeric/></validation_rule>
